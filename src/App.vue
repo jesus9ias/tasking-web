@@ -1,15 +1,21 @@
 <template>
   <div id="app">
-    <md-toolbar>
-      <h1 class="md-title">Tasking</h1>
-    </md-toolbar>
+    <NavBar />
     <router-view></router-view>
+    <md-button class="md-fab md-fab-bottom-right">
+      <md-icon>add</md-icon>
+    </md-button>
   </div>
 </template>
 
 <script>
+  import NavBar from './components/Common/NavBar';
+
   export default {
-    name: 'app'
+    name: 'app',
+    components: {
+      NavBar
+    }
   };
 </script>
 
