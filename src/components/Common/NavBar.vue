@@ -17,13 +17,11 @@
       </md-button>
 
       <md-menu-content>
-        <router-link to="/settings">
-          <md-menu-item>
-            <span>Settings</span>
-          </md-menu-item>
-        </router-link>
+        <md-menu-item @click.native="$router.push('/settings')">
+          <span>Settings</span>
+        </md-menu-item>
 
-        <md-menu-item>
+        <md-menu-item @click.native="$router.push('/login')">
           <span>Log Out</span>
         </md-menu-item>
       </md-menu-content>

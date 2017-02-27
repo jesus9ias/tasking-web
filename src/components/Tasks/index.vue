@@ -1,7 +1,7 @@
 <template>
   <section class="tasks">
 
-    <md-layout :md-gutter="16" class="tasks__grid">
+    <md-layout :md-gutter="16" class="grid">
       <md-layout class="task__block" md-flex="25" md-flex-xsmall="100" md-flex-medium="50">
         <md-card>
           <md-card-header>
@@ -65,10 +65,6 @@ export default {
 </script>
 
 <style scoped>
-  .tasks__grid.md-gutter-16:not(.md-column) {
-    margin: 0px;
-  }
-
   .task__block {
     margin: 10px 0px;
   }

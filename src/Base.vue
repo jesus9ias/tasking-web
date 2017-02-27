@@ -2,11 +2,9 @@
   <div id="base">
     <NavBar />
     <router-view></router-view>
-    <router-link to="/tasks/new">
-      <md-button class="md-fab md-fab-bottom-right">
-        <md-icon>add</md-icon>
-      </md-button>
-    </router-link>
+    <md-button @click.native="$router.push('/tasks/new')" class="md-fab md-fab-bottom-right">
+      <md-icon>add</md-icon>
+    </md-button>
   </div>
 </template>
 
