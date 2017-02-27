@@ -17,9 +17,11 @@
       </md-button>
 
       <md-menu-content>
-        <md-menu-item>
-          <span>Settings</span>
-        </md-menu-item>
+        <router-link to="/settings">
+          <md-menu-item>
+            <span>Settings</span>
+          </md-menu-item>
+        </router-link>
 
         <md-menu-item>
           <span>Log Out</span>
