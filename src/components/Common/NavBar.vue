@@ -2,6 +2,15 @@
   <md-toolbar>
     <h1 class="md-title" style="flex: 1">Tasking</h1>
 
+    <form style="flex: 1">
+      <md-input-container>
+
+        <label>Search</label>
+        <md-input type="text"></md-input>
+        <md-icon>search</md-icon>
+      </md-input-container>
+    </form>
+
     <md-menu md-size="4" md-direction="bottom left">
       <md-button class="md-icon-button" md-menu-trigger>
         <md-icon>face</md-icon>

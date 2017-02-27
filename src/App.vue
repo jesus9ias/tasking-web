@@ -2,9 +2,11 @@
   <div id="app">
     <NavBar />
     <router-view></router-view>
-    <md-button class="md-fab md-fab-bottom-right">
-      <md-icon>add</md-icon>
-    </md-button>
+    <router-link to="tasks/new">
+      <md-button class="md-fab md-fab-bottom-right">
+        <md-icon>add</md-icon>
+      </md-button>
+    </router-link>
   </div>
 </template>
 
