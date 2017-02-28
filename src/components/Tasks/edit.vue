@@ -1,14 +1,28 @@
 <template>
-  <section class="editTask">
-    Edit Task
+  <section class="newTask">
+    <def-task :task="task" :taskAction="updateTask" />
   </section>
 </template>
 
 <script>
+import DefTask from './defTask';
+
 export default {
   name: 'editTask',
   data() {
-    return {};
+    return {
+      task: {
+        title: '',
+        description: '',
+        dateLimit: ''
+      }
+    };
+  },
+  methods: {
+    updateTask() {}
+  },
+  components: {
+    DefTask
   }
 };
 </script>

@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
   export default {
     name: 'app'
   };
@@ -14,7 +13,8 @@
 <style>
   @import '~vue-material/dist/vue-material.css';
 
-  .grid.md-gutter-16:not(.md-column) {
-    margin: 0px;
+  .fixGutter.md-gutter-16:not(.md-column) {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 </style>

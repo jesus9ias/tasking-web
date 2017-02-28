@@ -1,7 +1,7 @@
 <template>
   <section class="tasks">
 
-    <md-layout :md-gutter="16" class="grid">
+    <md-layout :md-gutter="16" class="fixGutter">
       <md-layout class="task__block" md-flex="25" md-flex-xsmall="100" md-flex-medium="50">
         <md-card>
           <md-card-header>

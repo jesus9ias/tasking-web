@@ -1,14 +1,28 @@
 <template>
   <section class="newTask">
-    New Task
+    <def-task :task="task" :taskAction="saveTask" />
   </section>
 </template>
 
 <script>
+import DefTask from './defTask';
+
 export default {
   name: 'newTask',
   data() {
-    return {};
+    return {
+      task: {
+        title: '',
+        description: '',
+        dateLimit: ''
+      }
+    };
+  },
+  methods: {
+    saveTask() {}
+  },
+  components: {
+    DefTask
   }
 };
 </script>
