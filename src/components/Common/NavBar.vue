@@ -3,11 +3,9 @@
     <h1 class="md-title" style="flex: 1">Tasking</h1>
 
     <form style="flex: 1">
-      <md-input-container>
-
+      <md-input-container md-inline>
         <label>Search</label>
-        <md-input type="text"></md-input>
-        <md-icon>search</md-icon>
+        <md-input></md-input>
       </md-input-container>
     </form>
 
