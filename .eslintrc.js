@@ -36,6 +36,7 @@ module.exports = {
       'props': false
     }],
     "class-methods-use-this": 0,
+    "arrow-body-style": 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }

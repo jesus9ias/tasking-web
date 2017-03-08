@@ -11,7 +11,7 @@
             <md-card-content>
               <md-input-container>
                 <label>User</label>
-                <md-input type="text" v-model="login.user"></md-input>
+                <md-input type="text" v-model="login.email"></md-input>
               </md-input-container>
               <md-input-container md-has-password>
                 <label>Password</label>
@@ -30,19 +30,21 @@
 </template>
 
 <script>
+import LoginService from '../../services/loginService';
+
 export default {
   name: 'login',
   data() {
     return {
       login: {
-        user: '',
+        email: '',
         password: ''
       }
     };
   },
   methods: {
     doLogin() {
-      console.log('login');
+      LoginService.login(this.login.email, this.login.password);
     }
   }
 };
