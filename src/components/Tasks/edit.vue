@@ -5,6 +5,8 @@
 </template>
 
 <script>
+//  import moment from 'moment';
+import TasksService from '../../services/tasksService';
 import DefTask from './defTask';
 
 export default {
@@ -19,6 +21,15 @@ export default {
         recurrent: false
       }
     };
+  },
+  created() {
+    TasksService.getOneTask(this.$route.params.id)
+    .then((response) => {
+      this.task = response.data.data.task;
+    }).catch((error) => {
+      console.log(error);
+    });
+    console.log(this.$route.params.id);
   },
   methods: {
     updateTask() {}

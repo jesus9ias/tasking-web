@@ -2,13 +2,13 @@
   <section class="tasks">
 
     <md-layout :md-gutter="16" class="fixGutter">
-      <md-layout class="task__block" md-flex="25" md-flex-xsmall="100" md-flex-medium="50">
-        <md-card>
+      <md-layout md-column class="task__block" md-flex="25" md-flex-xsmall="100" md-flex-medium="50">
+        <md-card class="md-flex" v-for="(task, index) in tasks" :key="index">
           <md-card-header>
 
             <md-card-header-text>
-              <div class="md-title">Simple Task</div>
-              <div class="md-subhead">20 hours ago</div>
+              <div class="md-title">{{ task.title }}</div>
+              <div class="md-subhead">{{ dateFromNow(task.createdAt) }}</div>
             </md-card-header-text>
 
             <md-button class="md-icon-button">
@@ -21,7 +21,7 @@
               </md-button>
 
               <md-menu-content>
-                <md-menu-item>
+                <md-menu-item @click.native="$router.push('/tasks/' + task.id)">
                   <span>Edit</span>
                   <md-icon>mode_edit</md-icon>
                 </md-menu-item>
@@ -40,7 +40,7 @@
           </md-card-header>
 
           <md-card-content>
-            This is the text of the task and must be cut if it is too long.
+            {{ task.description }}
           </md-card-content>
 
           <md-card-content>
@@ -56,10 +56,28 @@
 </template>
 
 <script>
+import moment from 'moment';
+import TasksService from '../../services/tasksService';
+
 export default {
   name: 'tasks',
   data() {
-    return {};
+    return {
+      tasks: []
+    };
+  },
+  created() {
+    TasksService.getAlltasks()
+    .then((response) => {
+      this.tasks = response.data.data.tasks;
+    }).catch((error) => {
+      console.log(error);
+    });
+  },
+  methods: {
+    dateFromNow(date) {
+      return moment(date).fromNow();
+    }
   }
 };
 </script>
