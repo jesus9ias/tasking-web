@@ -19,7 +19,7 @@
           <span>Settings</span>
         </md-menu-item>
 
-        <md-menu-item @click.native="$router.push('/login')">
+        <md-menu-item @click.native="$router.push('/logout')">
           <span>Log Out</span>
         </md-menu-item>
       </md-menu-content>

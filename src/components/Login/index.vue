@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import storage from 'key-storage';
 import LoginService from '../../services/loginService';
 
 export default {
@@ -44,7 +45,16 @@ export default {
   },
   methods: {
     doLogin() {
-      LoginService.login(this.login.email, this.login.password);
+      LoginService.login(this.login.email, this.login.password)
+      .then((response) => {
+        console.log(response);
+        if (response.data.code === 200) {
+          storage.set('token', response.data.data.token);
+          document.location.href = '/';
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
     }
   }
 };

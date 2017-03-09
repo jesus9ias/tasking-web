@@ -5,21 +5,11 @@ import http from '../utils/http';
 class LoginService {
   isLogued() {
     const token = storage.get('token');
-    return http('GET', 'isLogued', { token })
-    .then((response) => {
-      console.log(response);
-    }).catch((error) => {
-      console.log(error);
-    });
+    return http('GET', 'isLogued', { token });
   }
 
   login(email, password) {
-    return http('POST', 'login', { email, password })
-    .then((response) => {
-      console.log(response);
-    }).catch((error) => {
-      console.log(error);
-    });
+    return http('POST', 'login', { email, password });
   }
 }
 
