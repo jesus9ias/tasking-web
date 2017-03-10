@@ -32,7 +32,14 @@ export default {
     console.log(this.$route.params.id);
   },
   methods: {
-    updateTask() {}
+    updateTask() {
+      TasksService.updateTask(this.$route.params.id, this.task)
+      .then((response) => {
+        console.log(response);
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
   },
   components: {
     DefTask

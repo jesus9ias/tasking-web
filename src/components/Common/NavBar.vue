@@ -1,6 +1,10 @@
 <template>
   <md-toolbar>
-    <h1 class="md-title" style="flex: 1">Tasking</h1>
+    <md-button @click.native="$router.push('/')">
+      <h1 class="md-title" style="flex: 1">Tasking</h1>
+    </md-button>
+
+    <md-button @click.native="$router.push('/tasks')">Tasks</md-button>
 
     <form style="flex: 1">
       <md-input-container md-inline>

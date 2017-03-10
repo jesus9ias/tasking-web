@@ -26,12 +26,12 @@
                   <md-icon>mode_edit</md-icon>
                 </md-menu-item>
 
-                <md-menu-item>
+                <md-menu-item @click.native="deleteTask(task.id)">
                   <span>Delete</span>
                   <md-icon>delete</md-icon>
                 </md-menu-item>
 
-                <md-menu-item>
+                <md-menu-item @click.native="completeTask(task.id)">
                   <span>Complete</span>
                   <md-icon>done</md-icon>
                 </md-menu-item>
@@ -77,6 +77,22 @@ export default {
   methods: {
     dateFromNow(date) {
       return moment(date).fromNow();
+    },
+    completeTask(id) {
+      TasksService.completeTask(id)
+      .then((response) => {
+        console.log(response);
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    deleteTask(id) {
+      TasksService.deleteTask(id)
+      .then((response) => {
+        console.log(response);
+      }).catch((error) => {
+        console.log(error);
+      });
     }
   }
 };

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import TasksService from '../../services/tasksService';
 import DefTask from './defTask';
 
 export default {
@@ -21,7 +22,14 @@ export default {
     };
   },
   methods: {
-    saveTask() {}
+    saveTask() {
+      TasksService.saveTask(this.task)
+      .then((response) => {
+        console.log(response);
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
   },
   components: {
     DefTask
