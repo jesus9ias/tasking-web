@@ -15,9 +15,9 @@ export default {
       task: {
         title: '',
         description: '',
-        dateLimit: '',
+        limitDate: '',
         priority: 1,
-        recurrent: false
+        isRecurrent: false
       }
     };
   },

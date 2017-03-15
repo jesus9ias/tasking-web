@@ -12,7 +12,7 @@
         </md-input-container>
         <md-input-container>
           <label>Limit Date</label>
-          <md-input type="date" v-model="task.dateLimit"></md-input>
+          <md-input type="date" v-model="task.limitDate"></md-input>
         </md-input-container>
         <md-input-container>
           <label for="priority">Priority</label>
@@ -24,7 +24,7 @@
           </md-select>
         </md-input-container>
         <md-layout>
-          <md-switch v-model="task.recurrent" class="md-primary">Tarea Recurrente</md-switch>
+          <md-switch v-model="task.isRecurrent" class="md-primary">Tarea Recurrente</md-switch>
 
           <div v-if="task.recurrent">
             <md-button-toggle class="md-warn">
