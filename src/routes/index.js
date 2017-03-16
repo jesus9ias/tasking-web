@@ -1,4 +1,3 @@
-import storage from 'key-storage';
 import Base from '@/Base';
 import Home from '@/components/Home';
 import Calendar from '@/components/Calendar';
@@ -6,6 +5,7 @@ import Tasks from '@/components/Tasks';
 import EditTask from '@/components/Tasks/edit';
 import NewTask from '@/components/Tasks/new';
 import Login from '@/components/Login';
+import Logout from '@/components/Logout';
 import Settings from '@/components/Settings';
 import auth from '../utils/auth';
 
@@ -23,7 +23,7 @@ export const routes = [
     ]
   },
   { path: '/login', name: 'Login', component: Login },
-  { path: '/logout', name: 'Logout' }
+  { path: '/logout', name: 'Logout', component: Logout }
 ];
 
 export function authorizeRoute() {
@@ -35,11 +35,6 @@ export function authorizeRoute() {
     } else if (to.name === 'Login' && auth()) {
       next({
         path: '/'
-      });
-    } else if (to.name === 'Logout') {
-      storage.remove('token');
-      next({
-        path: '/login'
       });
     } else {
       next();
