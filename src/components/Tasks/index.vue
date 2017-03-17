@@ -2,8 +2,8 @@
   <section class="tasks">
 
     <md-layout :md-gutter="16" class="fixGutter">
-      <md-layout md-column class="task__block" md-flex="25" md-flex-xsmall="100" md-flex-medium="50">
-        <md-card class="md-flex" v-for="(task, index) in tasks" :key="index">
+      <md-layout class="task__block" md-flex="25"  md-flex-medium="50" md-flex-xsmall="100" v-for="(task, index) in tasks" :key="index">
+        <md-card class="md-flex task">
           <md-card-header>
 
             <md-card-header-text>
@@ -99,7 +99,11 @@ export default {
 </script>
 
 <style scoped>
-  .task__block {
+  /*.task__block {
+    margin: 10px 0px;
+  }*/
+
+  .task {
     margin: 10px 0px;
   }
 </style>

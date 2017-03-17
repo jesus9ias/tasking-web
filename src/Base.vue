@@ -20,4 +20,7 @@
 </script>
 
 <style>
+  .md-fab.md-fab-bottom-right {
+    position: fixed;
+  }
 </style>
