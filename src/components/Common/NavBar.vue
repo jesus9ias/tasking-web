@@ -5,39 +5,59 @@
         <h1 class="md-title" style="flex: 1">Tasking</h1>
       </md-button>
 
-      <md-button @click.native="$router.push('/tasks')">Tasks</md-button>
+      <div v-if="!isMobile">
+        <md-button @click.native="$router.push('/tasks')">Tasks</md-button>
+      </div>
 
-      <form style="flex: 1">
-        <md-input-container md-inline>
-          <label>Search</label>
-          <md-input></md-input>
-        </md-input-container>
-      </form>
+      <div class="navButtonsRight">
+        <form style="flex: 1" v-if="!isMobile">
+          <md-input-container md-inline>
+            <label>Search</label>
+            <md-input />
+          </md-input-container>
+        </form>
 
-      <md-menu md-size="4" md-direction="bottom left">
-        <md-button class="md-icon-button" md-menu-trigger>
-          <md-icon>face</md-icon>
-        </md-button>
+        <md-menu md-size="4" md-direction="bottom left">
+          <md-button class="md-icon-button nav-button" md-menu-trigger>
+            <md-icon>face</md-icon>
+          </md-button>
 
-        <md-menu-content>
-          <md-menu-item @click.native="$router.push('/settings')">
-            <span>Settings</span>
-          </md-menu-item>
+          <md-menu-content>
+            <md-menu-item @click.native="$router.push('/settings')">
+              <span>Settings</span>
+            </md-menu-item>
 
-          <md-menu-item @click.native="$router.push('/logout')">
-            <span>Log Out</span>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
+            <md-menu-item @click.native="$router.push('/logout')">
+              <span>Log Out</span>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+
+        <md-menu md-size="4" md-direction="bottom left" v-if="isMobile">
+          <md-button class="md-icon-button" md-menu-trigger>
+            <md-icon>more_vert</md-icon>
+          </md-button>
+
+          <md-menu-content>
+            <md-menu-item @click.native="$router.push('/tasks')">
+              <span>Tasks</span>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
     </div>
   </md-whiteframe>
 </template>
 
 <script>
+import { isMobile } from '../../utils/isMobile';
+
 export default {
   name: 'nav',
   data() {
-    return {};
+    return {
+      isMobile
+    };
   }
 };
 </script>
@@ -49,5 +69,15 @@ export default {
     left: 0px;
     width: 100%;
     z-index: 5;
+  }
+
+  .navButtonsRight {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .nav-button {
+    height: 100%;
   }
 </style>
