@@ -23,4 +23,8 @@
   .md-fab.md-fab-bottom-right {
     position: fixed;
   }
+
+  .section {
+    padding: 64px 0px;
+  }
 </style>

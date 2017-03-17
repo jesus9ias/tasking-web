@@ -1,5 +1,5 @@
 <template>
-  <section class="newTask">
+  <section class="section newTask">
     <def-task :task="task" :taskAction="saveTask" />
   </section>
 </template>

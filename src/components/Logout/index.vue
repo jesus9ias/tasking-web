@@ -1,5 +1,5 @@
 <template>
-  <section class="logout">
+  <section class="section logout">
     <md-spinner :md-size="150" md-indeterminate></md-spinner>
   </section>
 </template>

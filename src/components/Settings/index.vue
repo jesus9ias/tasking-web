@@ -1,5 +1,5 @@
 <template>
-  <section class="settings">
+  <section class="section settings">
     Settings
   </section>
 </template>

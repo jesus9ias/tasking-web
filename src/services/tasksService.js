@@ -29,6 +29,10 @@ class TasksService {
     return http('POST', `tasks/${id}/delete`, { token });
   }
 
+  starTask(id) {
+    return http('POST', `tasks/${id}/star`, { token });
+  }
+
 
 }
 

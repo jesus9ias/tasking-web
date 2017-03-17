@@ -1,5 +1,5 @@
 <template>
-  <section class="tasks">
+  <section class="section tasks">
 
     <md-layout :md-gutter="16" class="fixGutter">
       <md-layout class="task__block" md-flex="25"  md-flex-medium="50" md-flex-xsmall="100" v-for="(task, index) in tasks" :key="index">
@@ -11,7 +11,11 @@
               <div class="md-subhead">{{ dateFromNow(task.createdAt) }}</div>
             </md-card-header-text>
 
-            <md-button class="md-icon-button">
+            <md-button
+              class="md-icon-button"
+              :class="{'md-accent': task.starredToTask}"
+              @click.native="startTask(task.id, index)"
+            >
               <md-icon class="md-primary">star</md-icon>
             </md-button>
 
@@ -90,6 +94,18 @@ export default {
       TasksService.deleteTask(id)
       .then((response) => {
         console.log(response);
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    startTask(id, index) {
+      TasksService.starTask(id)
+      .then((response) => {
+        if (response.data.data.id) {
+          this.tasks[index].starredToTask = true;
+        } else {
+          this.tasks[index].starredToTask = null;
+        }
       }).catch((error) => {
         console.log(error);
       });

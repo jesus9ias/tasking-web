@@ -1,5 +1,5 @@
 <template>
-  <section class="home">
+  <section class="section home">
     <chart
       :data="chartData"
      :options="{responsive: false, maintainAspectRatio: false}"
