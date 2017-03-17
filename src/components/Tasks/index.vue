@@ -2,8 +2,14 @@
   <section class="section tasks">
 
     <md-layout :md-gutter="16" class="fixGutter">
-      <md-layout class="task__block" md-flex="25"  md-flex-medium="50" md-flex-xsmall="100" v-for="(task, index) in tasks" :key="index">
-        <md-card class="md-flex task">
+      <md-layout
+        class="task__block"
+        md-flex="25"
+        md-flex-medium="50"
+        md-flex-xsmall="100"
+        v-for="(task, index) in tasks" :key="index"
+      >
+        <md-card class="md-flex task" :class="taskStatus(task)">
           <md-card-header>
 
             <md-card-header-text>
@@ -49,13 +55,12 @@
 
           <md-card-content>
             <h3 class="md-subheading">Expiration</h3>
-            <div class="md-subhead">Into 15 hours</div>
+            <div class="md-subhead">{{ dateFromNow(task.limitDate) }}</div>
           </md-card-content>
         </md-card>
       </md-layout>
 
     </md-layout>
-
   </section>
 </template>
 
@@ -109,6 +114,16 @@ export default {
       }).catch((error) => {
         console.log(error);
       });
+    },
+    taskStatus(task) {
+      const currentDate = new Date();
+      console.log(currentDate);
+      if (moment(currentDate).isAfter(task.limitDate, 'days')) {
+        return 'md-accent';
+      } else if (moment(currentDate).isSame(task.limitDate, 'days')) {
+        return 'md-warn';
+      }
+      return '';
     }
   }
 };
