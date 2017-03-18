@@ -1,9 +1,11 @@
 import Base from '@/Base';
 import Home from '@/components/Home';
 import Calendar from '@/components/Calendar';
+import Graphs from '@/components/Graphs';
 import Tasks from '@/components/Tasks';
 import EditTask from '@/components/Tasks/edit';
 import NewTask from '@/components/Tasks/new';
+import AllTasks from '@/components/Tasks/all';
 import Login from '@/components/Login';
 import Logout from '@/components/Logout';
 import Settings from '@/components/Settings';
@@ -16,7 +18,9 @@ export const routes = [
     children: [
       { path: '', name: 'Home', component: Home },
       { path: 'calendar', name: 'Calendar', component: Calendar },
+      { path: 'graphs', name: 'Graphs', component: Graphs },
       { path: 'tasks', name: 'Tasks', component: Tasks },
+      { path: 'tasks/all', name: 'AllTasks', component: AllTasks },
       { path: 'tasks/new', name: 'NewTask', component: NewTask },
       { path: 'tasks/:id', name: 'EditTask', component: EditTask },
       { path: 'settings', name: 'Settings', component: Settings }

@@ -27,4 +27,8 @@
   .section {
     padding: 64px 0px;
   }
+
+  .md-title {
+    padding: 0px 5px;
+  }
 </style>

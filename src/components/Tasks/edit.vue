@@ -7,7 +7,7 @@
 <script>
 import moment from 'moment';
 import TasksService from '../../services/tasksService';
-import DefTask from './defTask';
+import DefTask from './def';
 
 export default {
   name: 'editTask',

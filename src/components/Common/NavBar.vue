@@ -10,12 +10,6 @@
       </div>
 
       <div class="navButtonsRight">
-        <form style="flex: 1" v-if="!isMobile">
-          <md-input-container md-inline>
-            <label>Search</label>
-            <md-input />
-          </md-input-container>
-        </form>
 
         <md-menu md-size="4" md-direction="bottom left">
           <md-button class="md-icon-button nav-button" md-menu-trigger>

@@ -1,24 +1,13 @@
 <template>
   <section class="section tasks">
     <md-layout :md-gutter="16" class="fixGutter">
-      <h2 class="md-title">Starred Tasks</h2>
-    </md-layout>
-    <md-layout :md-gutter="16" class="fixGutter">
-      <card
-        :task="task"
-        :key="index"
-        v-for="(task, index) in starredTasks(tasks)"
-      />
-    </md-layout>
-
-    <md-layout :md-gutter="16" class="fixGutter">
       <h2 class="md-title">All Tasks</h2>
     </md-layout>
     <md-layout :md-gutter="16" class="fixGutter">
       <card
         :task="task"
         :key="index"
-        v-for="(task, index) in normalTasks(tasks)"
+        v-for="(task, index) in tasks"
       />
     </md-layout>
   </section>
@@ -29,7 +18,7 @@ import TasksService from '../../services/tasksService';
 import Card from './card';
 
 export default {
-  name: 'tasks',
+  name: 'allTasks',
   data() {
     return {
       tasks: []
@@ -43,14 +32,6 @@ export default {
       console.log(error);
     });
   },
-  methods: {
-    starredTasks(tasks) {
-      return tasks.filter(task => task.starredToTask !== null);
-    },
-    normalTasks(tasks) {
-      return tasks.filter(task => task.starredToTask === null);
-    }
-  },
   components: {
     Card
   }
@@ -58,4 +39,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>
