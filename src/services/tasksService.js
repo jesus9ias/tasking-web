@@ -5,8 +5,8 @@ import http from '../utils/http';
 const token = storage.get('token');
 
 class TasksService {
-  getAlltasks() {
-    return http('GET', 'tasks', { token });
+  getAlltasks(params = {}) {
+    return http('GET', 'tasks', { token, ...params });
   }
 
   getOneTask(id) {

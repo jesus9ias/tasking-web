@@ -7,6 +7,20 @@ import { routes, authorizeRoute } from './routes';
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
 
+Vue.material.registerTheme('cards', {
+  primary: 'grey',
+  accent: 'red',
+  warn: 'yellow',
+  background: 'white'
+});
+
+Vue.material.registerTheme('stars', {
+  primary: 'lime',
+  accent: 'light-blue',
+  warn: 'lime',
+  background: 'lime'
+});
+
 const router = new VueRouter({ routes, history: true });
 router.beforeEach(authorizeRoute());
 

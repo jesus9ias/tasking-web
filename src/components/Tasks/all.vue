@@ -25,7 +25,7 @@ export default {
     };
   },
   created() {
-    TasksService.getAlltasks()
+    TasksService.getAlltasks({ status: '2,3,4' })
     .then((response) => {
       this.tasks = response.data.data.tasks;
     }).catch((error) => {

@@ -5,7 +5,7 @@
     md-flex-medium="50"
     md-flex-xsmall="100"
   >
-    <md-card class="md-flex task" :class="taskStatus(task)">
+    <md-card class="md-flex task" :class="taskStatus(task)" :md-theme="theme">
       <md-card-header>
 
         <md-card-header-text>
@@ -14,11 +14,13 @@
         </md-card-header-text>
 
         <md-button
+          v-if="task.status===2"
+          md-theme="stars"
           class="md-icon-button"
           :class="{'md-accent': task.starredToTask}"
           @click.native="startTask()"
         >
-          <md-icon class="md-primary">star</md-icon>
+          <md-icon class="md-accent">star</md-icon>
         </md-button>
 
         <md-menu md-size="4" md-direction="bottom left">
@@ -64,7 +66,9 @@ import TasksService from '../../services/tasksService';
 export default {
   name: 'taskCard',
   data() {
-    return {};
+    return {
+      theme: ''
+    };
   },
   props: ['task'],
   methods: {
@@ -74,7 +78,9 @@ export default {
     completeTask() {
       TasksService.completeTask(this.task.id)
       .then((response) => {
-        console.log(response);
+        if (response.data.code === 200) {
+          this.task.status = 3;
+        }
       }).catch((error) => {
         console.log(error);
       });
@@ -82,7 +88,9 @@ export default {
     deleteTask() {
       TasksService.deleteTask(this.task.id)
       .then((response) => {
-        console.log(response);
+        if (response.data.code === 200) {
+          this.task.status = 4;
+        }
       }).catch((error) => {
         console.log(error);
       });
@@ -100,11 +108,19 @@ export default {
       });
     },
     taskStatus(task) {
-      const currentDate = new Date();
-      if (moment(currentDate).isAfter(task.limitDate, 'days')) {
-        return 'md-accent';
-      } else if (moment(currentDate).isSame(task.limitDate, 'days')) {
-        return 'md-warn';
+      this.theme = '';
+      if (this.task.status === 2) {
+        const currentDate = new Date();
+        if (moment(currentDate).isAfter(task.limitDate, 'days')) {
+          return 'md-accent';
+        } else if (moment(currentDate).isSame(task.limitDate, 'days')) {
+          return 'md-warn';
+        }
+      } else if (this.task.status === 3) {
+        return 'md-primary';
+      } else if (this.task.status === 4) {
+        this.theme = 'cards';
+        return 'md-primary';
       }
       return '';
     }
