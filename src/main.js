@@ -3,9 +3,12 @@ import VueRouter from 'vue-router';
 import VueMaterial from 'vue-material';
 import App from './App';
 import { routes, authorizeRoute } from './routes';
+import Loading from './components/Common/Loading';
 
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
+
+Vue.component('loading', Loading);
 
 Vue.material.registerTheme('cards', {
   primary: 'grey',

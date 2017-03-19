@@ -1,15 +1,18 @@
 <template>
   <section class="section tasks">
-    <md-layout :md-gutter="16" class="fixGutter">
-      <h2 class="md-title">All Tasks</h2>
-    </md-layout>
-    <md-layout :md-gutter="16" class="fixGutter">
-      <card
-        :task="task"
-        :key="index"
-        v-for="(task, index) in tasks"
-      />
-    </md-layout>
+    <div v-if="!isLoading">
+      <md-layout :md-gutter="16" class="fixGutter">
+        <h2 class="md-title">All Tasks</h2>
+      </md-layout>
+      <md-layout :md-gutter="16" class="fixGutter">
+        <card
+          :task="task"
+          :key="index"
+          v-for="(task, index) in tasks"
+        />
+      </md-layout>
+    </div>
+    <loading :isLoading="isLoading" />
   </section>
 </template>
 
@@ -21,16 +24,25 @@ export default {
   name: 'allTasks',
   data() {
     return {
-      tasks: []
+      tasks: [],
+      isLoading: false
     };
   },
   created() {
-    TasksService.getAlltasks({ status: '2,3,4' })
-    .then((response) => {
-      this.tasks = response.data.data.tasks;
-    }).catch((error) => {
-      console.log(error);
-    });
+    this.loadTasks();
+  },
+  methods: {
+    loadTasks() {
+      this.isLoading = true;
+      TasksService.getAlltasks({ status: '2,3,4' })
+      .then((response) => {
+        this.tasks = response.data.data.tasks;
+        this.isLoading = false;
+      }).catch((error) => {
+        console.log(error);
+        this.isLoading = false;
+      });
+    }
   },
   components: {
     Card

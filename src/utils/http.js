@@ -1,7 +1,7 @@
 import axios from 'axios';
 import createQuery from './query';
 
-axios.defaults.baseURL = 'http://localhost:3333/';
+axios.defaults.baseURL = process.env.API_URL;
 
 export default (method = 'GET', path = '', query = {}, data = {}) => {
   if (method === 'GET') {

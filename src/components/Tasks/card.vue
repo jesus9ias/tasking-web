@@ -1,16 +1,16 @@
 <template>
   <md-layout
-    class="task__block"
     md-flex="25"
     md-flex-medium="50"
     md-flex-xsmall="100"
   >
-    <md-card class="md-flex task" :class="taskStatus(task)" :md-theme="theme">
+    <md-card class="md-flex card" :class="taskStatus" :md-theme="theme">
       <md-card-header>
 
         <md-card-header-text>
           <div class="md-title">{{ task.title }}</div>
           <div class="md-subhead">{{ dateFromNow(task.createdAt) }}</div>
+          <div class="md-subhead">{{ priorities[task.priority] }}</div>
         </md-card-header-text>
 
         <md-button
@@ -29,19 +29,24 @@
           </md-button>
 
           <md-menu-content>
-            <md-menu-item @click.native="$router.push('/tasks/' + task.id)">
+            <md-menu-item v-if="task.status===2" @click.native="$router.push('/tasks/' + task.id)">
               <span>Edit</span>
               <md-icon>mode_edit</md-icon>
             </md-menu-item>
 
-            <md-menu-item @click.native="deleteTask()">
+            <md-menu-item v-if="task.status===2" @click.native="deleteTask()">
               <span>Delete</span>
               <md-icon>delete</md-icon>
             </md-menu-item>
 
-            <md-menu-item @click.native="completeTask()">
+            <md-menu-item v-if="task.status===2" @click.native="completeTask()">
               <span>Complete</span>
               <md-icon>done</md-icon>
+            </md-menu-item>
+
+            <md-menu-item v-if="task.status!==2" @click.native="reopenTask()">
+              <span>Reopen</span>
+              <md-icon>replay</md-icon>
             </md-menu-item>
           </md-menu-content>
         </md-menu>
@@ -63,11 +68,19 @@
 import moment from 'moment';
 import TasksService from '../../services/tasksService';
 
+const priorities = {
+  1: 'Low',
+  2: 'Medium',
+  3: 'High',
+  4: 'Extreme'
+};
+
 export default {
   name: 'taskCard',
   data() {
     return {
-      theme: ''
+      theme: '',
+      priorities
     };
   },
   props: ['task'],
@@ -107,13 +120,25 @@ export default {
         console.log(error);
       });
     },
-    taskStatus(task) {
+    reopenTask() {
+      TasksService.reopenTask(this.task.id)
+      .then((response) => {
+        if (response.data.code === 200) {
+          this.task.status = 2;
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+  },
+  computed: {
+    taskStatus() {
       this.theme = '';
       if (this.task.status === 2) {
         const currentDate = new Date();
-        if (moment(currentDate).isAfter(task.limitDate, 'days')) {
+        if (moment(currentDate).isAfter(this.task.limitDate, 'days')) {
           return 'md-accent';
-        } else if (moment(currentDate).isSame(task.limitDate, 'days')) {
+        } else if (moment(currentDate).isSame(this.task.limitDate, 'days')) {
           return 'md-warn';
         }
       } else if (this.task.status === 3) {
@@ -129,7 +154,4 @@ export default {
 </script>
 
 <style scoped>
-  .task {
-    margin: 10px 0px;
-  }
 </style>

@@ -1,6 +1,5 @@
 import storage from 'key-storage';
 import http from '../utils/http';
-//  import config from '../config';
 
 const token = storage.get('token');
 

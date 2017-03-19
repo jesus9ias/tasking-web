@@ -20,24 +20,9 @@
             <md-option value="1">Low</md-option>
             <md-option value="2">Medium</md-option>
             <md-option value="3">Hign</md-option>
-            <md-option value="4">Extrem</md-option>
+            <md-option value="4">Extreme</md-option>
           </md-select>
         </md-input-container>
-        <md-layout>
-          <md-switch v-model="task.isRecurrent" class="md-primary">Tarea Recurrente</md-switch>
-
-          <div v-if="task.recurrent">
-            <md-button-toggle class="md-warn">
-              <md-button class="md-toggle">S</md-button>
-              <md-button class="md-toggle">M</md-button>
-              <md-button class="md-toggle">T</md-button>
-              <md-button class="md-toggle">W</md-button>
-              <md-button class="md-toggle">T</md-button>
-              <md-button class="md-toggle">F</md-button>
-              <md-button class="md-toggle">S</md-button>
-            </md-button-toggle>
-          </div>
-        </md-layout>
         <md-button type="submit" class="md-raised md-primary">Save</md-button>
       </form>
     </md-layout>

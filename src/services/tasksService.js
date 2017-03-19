@@ -1,6 +1,5 @@
 import storage from 'key-storage';
 import http from '../utils/http';
-//  import config from '../config';
 
 const token = storage.get('token');
 
@@ -29,11 +28,13 @@ class TasksService {
     return http('POST', `tasks/${id}/delete`, { token });
   }
 
+  reopenTask(id) {
+    return http('POST', `tasks/${id}/reopen`, { token });
+  }
+
   starTask(id) {
     return http('POST', `tasks/${id}/star`, { token });
   }
-
-
 }
 
 export default new TasksService();

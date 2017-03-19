@@ -31,4 +31,8 @@
   .md-title {
     padding: 0px 5px;
   }
+
+  .card {
+    margin: 10px 0px;
+  }
 </style>

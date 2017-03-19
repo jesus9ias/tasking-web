@@ -25,7 +25,9 @@ export default {
     saveTask() {
       TasksService.saveTask(this.task)
       .then((response) => {
-        console.log(response);
+        if (response.data.code === 200) {
+          this.$router.push('/tasks');
+        }
       }).catch((error) => {
         console.log(error);
       });

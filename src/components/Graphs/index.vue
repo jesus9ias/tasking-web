@@ -1,16 +1,11 @@
 <template>
   <section class="section home">
-    <chart
-      :data="chartData"
-      :options="{ responsive: false, maintainAspectRatio: false }"
-      :width="400"
-      :height="200"
-    />
+    
   </section>
 </template>
 
 <script>
-import Chart from './chart';
+//  import Chart from './chart';
 
 export default {
   name: 'graphs',
@@ -28,9 +23,7 @@ export default {
       }
     };
   },
-  components: {
-    Chart
-  }
+  components: {}
 };
 </script>
 
