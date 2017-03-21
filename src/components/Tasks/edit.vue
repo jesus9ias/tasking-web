@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import moment from 'moment';
 import TasksService from '../../services/tasksService';
 import DefTask from './def';
 
@@ -43,7 +42,7 @@ export default {
           const { title, description, limitDate, priority, isRecurrent } = response.data.data.task;
           this.task.title = title;
           this.task.description = description;
-          this.task.limitDate = moment(limitDate).format('YYYY-MM-DD');
+          this.task.limitDate = limitDate;
           this.task.priority = priority;
           this.task.isRecurrent = Boolean(isRecurrent);
         } else {

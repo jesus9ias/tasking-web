@@ -12,7 +12,7 @@
         </md-input-container>
         <md-input-container>
           <label>Limit Date</label>
-          <md-input type="date" v-model="task.limitDate"></md-input>
+          <md-input type="datetime-local" v-model="task.limitDate"></md-input>
         </md-input-container>
         <md-input-container>
           <label for="priority">Priority</label>

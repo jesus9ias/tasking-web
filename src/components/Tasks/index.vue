@@ -44,10 +44,16 @@ export default {
   },
   methods: {
     starredTasks(tasks) {
-      return tasks.filter(task => task.starredToTask !== null);
+      if (tasks) {
+        return tasks.filter(task => task.starredToTask !== null);
+      }
+      return [];
     },
     normalTasks(tasks) {
-      return tasks.filter(task => task.starredToTask === null);
+      if (tasks) {
+        return tasks.filter(task => task.starredToTask === null);
+      }
+      return [];
     },
     loadTasks() {
       this.isLoading = true;
