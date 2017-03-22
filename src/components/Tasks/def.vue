@@ -17,10 +17,10 @@
         <md-input-container>
           <label for="priority">Priority</label>
           <md-select id="priority" v-model="task.priority">
-            <md-option value="1">Low</md-option>
-            <md-option value="2">Medium</md-option>
-            <md-option value="3">Hign</md-option>
-            <md-option value="4">Extreme</md-option>
+            <md-option v-bind:value="1">Low</md-option>
+            <md-option v-bind:value="2">Medium</md-option>
+            <md-option v-bind:value="3">Hign</md-option>
+            <md-option v-bind:value="4">Extreme</md-option>
           </md-select>
         </md-input-container>
         <md-button type="submit" class="md-raised md-primary">Save</md-button>

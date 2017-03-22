@@ -47,7 +47,6 @@ export default {
     doLogin() {
       LoginService.login(this.login.email, this.login.password)
       .then((response) => {
-        console.log(response);
         if (response.data.code === 200) {
           storage.set('token', response.data.data.token);
           document.location.href = '/';
