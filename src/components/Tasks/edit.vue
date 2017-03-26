@@ -1,5 +1,5 @@
 <template>
-  <section class="section newTask">
+  <section class="section editTask">
     <def-task
       :task="task"
       :taskAction="updateTask"

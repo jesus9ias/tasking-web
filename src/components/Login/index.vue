@@ -11,11 +11,21 @@
             <md-card-content>
               <md-input-container>
                 <label>User</label>
-                <md-input type="text" v-model="login.email"></md-input>
+                <md-input
+                  type="email"
+                  autocorrect="off"
+                  autocapitalize="none"
+                  v-model="login.email"
+                />
               </md-input-container>
               <md-input-container md-has-password>
                 <label>Password</label>
-                <md-input type="password" v-model="login.password"></md-input>
+                <md-input
+                  type="password"
+                  autocorrect="off"
+                  autocapitalize="none"
+                  v-model="login.password"
+                />
               </md-input-container>
             </md-card-content>
             <md-card-actions>
