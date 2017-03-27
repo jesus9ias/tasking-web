@@ -32,7 +32,7 @@ import TasksService from '../../services/tasksService';
 import Card from './card';
 
 export default {
-  name: 'tasks',
+  name: 'Tasks',
   data() {
     return {
       tasks: [],

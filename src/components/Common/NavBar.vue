@@ -59,7 +59,7 @@
 import { isMobile } from '../../utils/isMobile';
 
 export default {
-  name: 'nav',
+  name: 'Nav',
   data() {
     return {
       isMobile

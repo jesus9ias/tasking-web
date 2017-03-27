@@ -8,7 +8,7 @@
 import storage from 'key-storage';
 
 export default {
-  name: 'logout',
+  name: 'Logout',
   created() {
     storage.remove('token');
     document.location.href = '/';

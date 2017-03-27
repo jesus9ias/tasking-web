@@ -21,7 +21,7 @@ import TasksService from '../../services/tasksService';
 import Card from './card';
 
 export default {
-  name: 'allTasks',
+  name: 'AllTasks',
   data() {
     return {
       tasks: [],

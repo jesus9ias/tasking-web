@@ -4,6 +4,7 @@
       :task="task"
       :taskAction="updateTask"
       v-if="!isLoading && taskExists"
+      :isRequesting="isRequesting"
     />
     <p v-if="!isLoading && !taskExists">This task dosn't exists</p>
     <loading :isLoading="isLoading" />
@@ -15,7 +16,7 @@ import TasksService from '../../services/tasksService';
 import DefTask from './def';
 
 export default {
-  name: 'editTask',
+  name: 'EditTask',
   data() {
     return {
       task: {
@@ -26,6 +27,7 @@ export default {
         isRecurrent: false
       },
       isLoading: false,
+      isRequesting: false,
       taskExists: true
     };
   },
@@ -55,13 +57,17 @@ export default {
       });
     },
     updateTask() {
+      this.isRequesting = true;
       TasksService.updateTask(this.$route.params.id, this.task)
       .then((response) => {
         if (response.data.code === 200) {
           this.$router.push('/tasks');
+        } else {
+          this.isRequesting = false;
         }
       }).catch((error) => {
         console.log(error);
+        this.isRequesting = false;
       });
     }
   },

@@ -29,7 +29,8 @@
               </md-input-container>
             </md-card-content>
             <md-card-actions>
-              <md-button class="md-raised md-primary" type="submit">Login</md-button>
+              <md-button class="md-raised md-primary" type="submit" v-if="!isLogin">Login</md-button>
+              <loading-button :show="isLogin" />
               <md-button>I forgot my password</md-button>
             </md-card-actions>
           </md-card>
@@ -44,25 +45,30 @@ import storage from 'key-storage';
 import LoginService from '../../services/loginService';
 
 export default {
-  name: 'login',
+  name: 'Login',
   data() {
     return {
       login: {
         email: '',
         password: ''
-      }
+      },
+      isLogin: false
     };
   },
   methods: {
     doLogin() {
+      this.isLogin = true;
       LoginService.login(this.login.email, this.login.password)
       .then((response) => {
         if (response.data.code === 200) {
           storage.set('token', response.data.data.token);
           document.location.href = '/';
+        } else {
+          this.isLogin = false;
         }
       }).catch((error) => {
         console.log(error);
+        this.isLogin = false;
       });
     }
   }

@@ -4,15 +4,15 @@
       <form class="md-flex" novalidate @submit.stop.prevent="action">
         <md-input-container>
           <label>Title</label>
-          <md-input v-model="task.title"></md-input>
+          <md-input v-model="task.title" />
         </md-input-container>
         <md-input-container>
           <label>Description</label>
-          <md-textarea maxlength="70" v-model="task.description"></md-textarea>
+          <md-textarea maxlength="70" v-model="task.description" />
         </md-input-container>
         <md-input-container>
           <label>Limit Date</label>
-          <md-input type="datetime-local" v-model="task.limitDate"></md-input>
+          <md-input type="datetime-local" v-model="task.limitDate" />
         </md-input-container>
         <md-input-container>
           <label for="priority">Priority</label>
@@ -23,7 +23,8 @@
             <md-option v-bind:value="4">Extreme</md-option>
           </md-select>
         </md-input-container>
-        <md-button type="submit" class="md-raised md-primary">Save</md-button>
+        <md-button type="submit" class="md-raised md-primary" v-if="!isRequesting">Save</md-button>
+        <loading-button :show="isRequesting" />
       </form>
     </md-layout>
   </md-layout>
@@ -31,7 +32,7 @@
 
 <script>
 export default {
-  name: 'defTask',
+  name: 'DefTask',
   data() {
     return {};
   },
@@ -42,7 +43,8 @@ export default {
   },
   props: [
     'task',
-    'taskAction'
+    'taskAction',
+    'isRequesting'
   ]
 };
 </script>

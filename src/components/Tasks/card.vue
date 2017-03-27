@@ -76,7 +76,7 @@ const priorities = {
 };
 
 export default {
-  name: 'taskCard',
+  name: 'TaskCard',
   data() {
     return {
       theme: '',

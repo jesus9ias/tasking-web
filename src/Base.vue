@@ -9,10 +9,10 @@
 </template>
 
 <script>
-  import NavBar from './components/Common/NavBar';
+  import NavBar from './components/Common/navBar';
 
   export default {
-    name: 'base',
+    name: 'Base',
     components: {
       NavBar
     }

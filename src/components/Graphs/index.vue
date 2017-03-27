@@ -1,6 +1,6 @@
 <template>
   <section class="section home">
-    
+
   </section>
 </template>
 
@@ -8,7 +8,7 @@
 //  import Chart from './chart';
 
 export default {
-  name: 'graphs',
+  name: 'Graphs',
   data() {
     return {
       chartData: {

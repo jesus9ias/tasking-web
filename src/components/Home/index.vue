@@ -31,7 +31,7 @@
 import HomeService from '../../services/homeService';
 
 export default {
-  name: 'home',
+  name: 'Home',
   data() {
     return {
       homeInfo: {},
@@ -52,7 +52,7 @@ export default {
           expiredTasks: response.data.data.expired.total
         };
         this.isLoading = false;
-      }).catch((error) => {
+      }, (error) => {
         console.log(error);
         this.isLoading = false;
       });
