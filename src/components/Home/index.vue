@@ -1,25 +1,26 @@
 <template>
   <section class="section home">
     <md-layout
+      class="fixGutter"
+      md-align="center"
       :md-gutter="16"
-      class="fixGutter card"
       v-if="!isLoading"
     >
-      <md-layout md-flex="100">
+      <md-layout md-flex="50" md-flex-xsmall="100">
         <md-card class="md-flex">
           <md-card-header>
-
             <md-card-header-text>
               <div class="md-title">Tasking</div>
               <div class="md-subhead">Global Info</div>
             </md-card-header-text>
           </md-card-header>
 
-          <md-card-content>
-            <p>Active Tasks: {{homeInfo.activeTasks}}</p>
-            <p>Completed Tasks: {{homeInfo.completedTasks}}</p>
-            <p>Expired Tasks: {{homeInfo.expiredTasks}}</p>
+          <md-card-content v-if="homeInfo.activeTasks">
+            <p>Active Tasks: <b>{{homeInfo.activeTasks}}</b></p>
+            <p>Completed Tasks: <b>{{homeInfo.completedTasks}}</b></p>
+            <p>Expired Tasks: <b>{{homeInfo.expiredTasks}}</b></p>
           </md-card-content>
+          <p v-if="!homeInfo.activeTasks">There is no info</p>
         </md-card>
       </md-layout>
     </md-layout>

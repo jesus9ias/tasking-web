@@ -1,7 +1,5 @@
 <template>
-  <section class="section logout">
-    <md-spinner :md-size="150" md-indeterminate />
-  </section>
+  <loading :isLoading="true" />
 </template>
 
 <script>

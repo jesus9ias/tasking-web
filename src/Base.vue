@@ -1,6 +1,6 @@
 <template>
   <div id="base">
-    <NavBar />
+    <nav-bar />
     <router-view></router-view>
     <md-button @click.native="$router.push('/tasks/new')" class="md-fab md-fab-bottom-right">
       <md-icon>add</md-icon>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import NavBar from './components/Common/navBar';
+  import NavBar from './components/Common/NavBar';
 
   export default {
     name: 'Base',
@@ -25,7 +25,7 @@
   }
 
   .section {
-    padding: 64px 0px;
+    padding: 70px 0px;
   }
 
   .md-title {

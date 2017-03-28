@@ -3,6 +3,7 @@
     <def-task
       :task="task"
       :taskAction="updateTask"
+      actionText="Update"
       v-if="!isLoading && taskExists"
       :isRequesting="isRequesting"
     />
