@@ -9,7 +9,7 @@
               <div class="md-subhead">Write your User and Password</div>
             </md-card-header>
             <md-card-content>
-              <md-input-container>
+              <md-input-container v-bind:class="{ 'md-input-invalid': errors.email }">
                 <label>User</label>
                 <md-input
                   type="email"
@@ -17,8 +17,9 @@
                   autocapitalize="none"
                   v-model="login.email"
                 />
+                <span class="md-error">Must write a correct Email</span>
               </md-input-container>
-              <md-input-container md-has-password>
+              <md-input-container md-has-password v-bind:class="{ 'md-input-invalid': errors.password }">
                 <label>Password</label>
                 <md-input
                   type="password"
@@ -26,6 +27,7 @@
                   autocapitalize="none"
                   v-model="login.password"
                 />
+                <span class="md-error">Must write a correct Password</span>
               </md-input-container>
             </md-card-content>
             <md-card-actions>
@@ -42,7 +44,15 @@
 
 <script>
 import storage from 'key-storage';
+import errors from '../../utils/errors';
 import LoginService from '../../services/loginService';
+
+const baseErrors = () => {
+  return {
+    email: false,
+    password: false
+  };
+};
 
 export default {
   name: 'Login',
@@ -52,24 +62,38 @@ export default {
         email: '',
         password: ''
       },
+      errors: baseErrors(),
       isLogin: false
     };
   },
   methods: {
     doLogin() {
+      this.errors = baseErrors();
       this.isLogin = true;
-      LoginService.login(this.login.email, this.login.password)
-      .then((response) => {
-        if (response.data.code === 200) {
-          storage.set('token', response.data.data.token);
-          document.location.href = '/';
-        } else {
+      if (this.login.email.trim() === '') {
+        this.errors.email = true;
+      }
+      if (this.login.password.trim() === '') {
+        this.errors.password = true;
+      }
+
+      if (this.errors.email === false && this.errors.password === false) {
+        LoginService.login(this.login.email, this.login.password)
+        .then((response) => {
+          if (response.data.code === 200) {
+            storage.set('token', response.data.data.token);
+            document.location.href = '/';
+          } else {
+            console.log(errors(response.data.code));
+            this.isLogin = false;
+          }
+        }).catch(() => {
+          console.log(errors(0));
           this.isLogin = false;
-        }
-      }).catch((error) => {
-        console.log(error);
+        });
+      } else {
         this.isLogin = false;
-      });
+      }
     }
   }
 };
