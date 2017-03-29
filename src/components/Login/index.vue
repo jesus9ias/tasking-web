@@ -1,6 +1,10 @@
 <template>
   <section class="login">
-    <md-layout class="fixGutter" :md-gutter="16" md-align="center">
+    <md-layout
+      class="fixGutter"
+      md-align="center"
+      :md-gutter="16"
+    >
       <md-layout md-flex="50" md-flex-xsmall="100">
         <form class="md-flex" novalidate @submit.prevent="doLogin">
           <md-card md-with-hover>
@@ -39,6 +43,11 @@
         </form>
       </md-layout>
     </md-layout>
+
+    <md-snackbar md-position="bottom center" ref="snackbar" md-duration="5000">
+      <span>{{ errorMessage }}</span>
+      <md-button class="md-accent" md-theme="light-blue" @click.native="$refs.snackbar.close()">Close</md-button>
+    </md-snackbar>
   </section>
 </template>
 
@@ -63,6 +72,7 @@ export default {
         password: ''
       },
       errors: baseErrors(),
+      errorMessage: '',
       isLogin: false
     };
   },
@@ -84,16 +94,24 @@ export default {
             storage.set('token', response.data.data.token);
             document.location.href = '/';
           } else {
-            console.log(errors(response.data.code));
+            if (response.data.code === 404) {
+              this.openSnack('Incorrect Login Data');
+            } else {
+              this.openSnack(errors(response.data.code));
+            }
             this.isLogin = false;
           }
         }).catch(() => {
-          console.log(errors(0));
+          this.openSnack(errors(0));
           this.isLogin = false;
         });
       } else {
         this.isLogin = false;
       }
+    },
+    openSnack(msg) {
+      this.errorMessage = msg;
+      this.$refs.snackbar.open();
     }
   }
 };

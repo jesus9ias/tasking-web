@@ -9,10 +9,15 @@
     />
     <p v-if="!isLoading && !taskExists">This task dosn't exists</p>
     <loading :isLoading="isLoading" />
+    <md-snackbar md-position="bottom center" ref="snackbar" md-duration="5000">
+      <span>{{ errorMessage }}</span>
+      <md-button class="md-accent" md-theme="light-blue" @click.native="$refs.snackbar.close()">Close</md-button>
+    </md-snackbar>
   </section>
 </template>
 
 <script>
+import errors from '../../utils/errors';
 import TasksService from '../../services/tasksService';
 import DefTask from './def';
 
@@ -29,7 +34,8 @@ export default {
       },
       isLoading: false,
       isRequesting: false,
-      taskExists: true
+      taskExists: true,
+      errorMessage: ''
     };
   },
   created() {
@@ -49,11 +55,16 @@ export default {
           this.task.priority = priority;
           this.task.isRecurrent = Boolean(isRecurrent);
         } else {
+          if (response.data.code === 404) {
+            this.openSnack('Task Not Found');
+          } else {
+            this.openSnack(response.data.msg);
+          }
           this.taskExists = false;
         }
         this.isLoading = false;
-      }).catch((error) => {
-        console.log(error);
+      }).catch(() => {
+        this.openSnack(errors(0));
         this.isLoading = false;
       });
     },
@@ -64,12 +75,21 @@ export default {
         if (response.data.code === 200) {
           this.$router.push('/tasks');
         } else {
+          if (response.data.code === 404) {
+            this.openSnack('Task Not Found');
+          } else {
+            this.openSnack(response.data.msg);
+          }
           this.isRequesting = false;
         }
-      }).catch((error) => {
-        console.log(error);
+      }).catch(() => {
+        this.openSnack(errors(0));
         this.isRequesting = false;
       });
+    },
+    openSnack(msg) {
+      this.errorMessage = msg;
+      this.$refs.snackbar.open();
     }
   },
   watch: {

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import NavBar from './components/Common/NavBar';
+  import NavBar from './components/Common/navBar';
 
   export default {
     name: 'Base',

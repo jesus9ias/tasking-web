@@ -5,10 +5,15 @@
       :taskAction="saveTask"
       :isRequesting="isRequesting"
     />
+    <md-snackbar md-position="bottom center" ref="snackbar" md-duration="5000">
+      <span>{{ errorMessage }}</span>
+      <md-button class="md-accent" md-theme="light-blue" @click.native="$refs.snackbar.close()">Close</md-button>
+    </md-snackbar>
   </section>
 </template>
 
 <script>
+import errors from '../../utils/errors';
 import TasksService from '../../services/tasksService';
 import DefTask from './def';
 
@@ -23,7 +28,8 @@ export default {
         priority: 1,
         isRecurrent: false
       },
-      isRequesting: false
+      isRequesting: false,
+      errorMessage: ''
     };
   },
   methods: {
@@ -34,12 +40,17 @@ export default {
         if (response.data.code === 200) {
           this.$router.push('/tasks');
         } else {
+          this.openSnack(response.data.msg);
           this.isRequesting = false;
         }
-      }).catch((error) => {
-        console.log(error);
-        this.isRequesting = true;
+      }).catch(() => {
+        this.openSnack(errors(0));
+        this.isRequesting = false;
       });
+    },
+    openSnack(msg) {
+      this.errorMessage = msg;
+      this.$refs.snackbar.open();
     }
   },
   components: {
