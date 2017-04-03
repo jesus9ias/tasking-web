@@ -35,4 +35,8 @@
   .card {
     margin: 10px 0px;
   }
+
+  .text {
+    margin: 5px;
+  }
 </style>

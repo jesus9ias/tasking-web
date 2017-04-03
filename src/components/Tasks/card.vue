@@ -86,7 +86,7 @@ export default {
   props: ['task'],
   methods: {
     dateFromNow(date) {
-      return moment(date).fromNow();
+      return moment.tz(date, 'YYYY-MM-DDTHH:mm', 'America/Mexico_City').fromNow();
     },
     completeTask() {
       TasksService.completeTask(this.task.id)

@@ -15,12 +15,11 @@
             </md-card-header-text>
           </md-card-header>
 
-          <md-card-content v-if="homeInfo.activeTasks">
+          <md-card-content>
             <p>Active Tasks: <b>{{homeInfo.activeTasks}}</b></p>
             <p>Completed Tasks: <b>{{homeInfo.completedTasks}}</b></p>
             <p>Expired Tasks: <b>{{homeInfo.expiredTasks}}</b></p>
           </md-card-content>
-          <p v-if="!homeInfo.activeTasks">There is no info</p>
         </md-card>
       </md-layout>
     </md-layout>

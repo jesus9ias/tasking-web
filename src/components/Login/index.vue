@@ -37,7 +37,6 @@
             <md-card-actions>
               <md-button class="md-raised md-primary" type="submit" v-if="!isLogin">Login</md-button>
               <loading-button :show="isLogin" />
-              <md-button>I forgot my password</md-button>
             </md-card-actions>
           </md-card>
         </form>

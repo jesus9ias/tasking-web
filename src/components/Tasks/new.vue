@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import moment from 'moment-timezone';
 import errors from '../../utils/errors';
 import TasksService from '../../services/tasksService';
 import DefTask from './def';
@@ -24,7 +25,7 @@ export default {
       task: {
         title: '',
         description: '',
-        limitDate: '',
+        limitDate: moment.tz('America/Mexico_City').format('YYYY-MM-DDTHH:mm'),
         priority: 1,
         isRecurrent: false
       },

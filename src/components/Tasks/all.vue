@@ -10,6 +10,7 @@
           :key="index"
           v-for="(task, index) in tasks"
         />
+        <p class="text" v-if="!areThereTasks">There are no tasks</p>
       </md-layout>
     </div>
     <loading :isLoading="isLoading" />
@@ -42,6 +43,11 @@ export default {
         console.log(error);
         this.isLoading = false;
       });
+    }
+  },
+  computed: {
+    areThereTasks() {
+      return this.tasks.length > 0;
     }
   },
   components: {
