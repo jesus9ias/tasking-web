@@ -66,6 +66,7 @@
 
 <script>
 import moment from 'moment';
+import logout from '../../utils/logout';
 import TasksService from '../../services/tasksService';
 
 const priorities = {
@@ -95,6 +96,7 @@ export default {
           this.task.status = 3;
         }
       }).catch((error) => {
+        logout();
         console.log(error);
       });
     },
@@ -105,6 +107,7 @@ export default {
           this.task.status = 4;
         }
       }).catch((error) => {
+        logout();
         console.log(error);
       });
     },
@@ -117,6 +120,7 @@ export default {
           this.task.starredToTask = null;
         }
       }).catch((error) => {
+        logout();
         console.log(error);
       });
     },
@@ -127,6 +131,7 @@ export default {
           this.task.status = 2;
         }
       }).catch((error) => {
+        logout();
         console.log(error);
       });
     }

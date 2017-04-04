@@ -26,13 +26,13 @@ Vue.material.registerTheme('stars', {
   background: 'lime'
 });
 
-const router = new VueRouter({ routes, history: true });
-router.beforeEach(authorizeRoute());
+global.router = new VueRouter({ routes, history: true });
+global.router.beforeEach(authorizeRoute());
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  router: global.router,
   template: '<App/>',
   components: { App }
 });

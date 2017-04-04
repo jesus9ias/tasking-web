@@ -9,10 +9,31 @@
 </template>
 
 <script>
+  import storage from 'key-storage';
+  import LoginService from './services/loginService';
   import NavBar from './components/Common/navBar';
 
   export default {
     name: 'Base',
+    created() {
+      this.checkSession();
+    },
+    methods: {
+      checkSession() {
+        LoginService.checkSession()
+        .then((response) => {
+          if (response.data.code !== 200) {
+            this.logout();
+          }
+        }, () => {
+          this.logout();
+        });
+      },
+      logout() {
+        storage.remove('token');
+        this.$router.push('/login');
+      }
+    },
     components: {
       NavBar
     }

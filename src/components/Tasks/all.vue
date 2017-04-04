@@ -19,6 +19,7 @@
 
 <script>
 import TasksService from '../../services/tasksService';
+import logout from '../../utils/logout';
 import Card from './card';
 
 export default {
@@ -39,9 +40,9 @@ export default {
       .then((response) => {
         this.tasks = response.data.data.tasks;
         this.isLoading = false;
-      }).catch((error) => {
-        console.log(error);
+      }).catch(() => {
         this.isLoading = false;
+        logout();
       });
     }
   },

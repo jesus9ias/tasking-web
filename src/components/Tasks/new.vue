@@ -14,8 +14,8 @@
 
 <script>
 import moment from 'moment-timezone';
-import errors from '../../utils/errors';
 import TasksService from '../../services/tasksService';
+import logout from '../../utils/logout';
 import DefTask from './def';
 
 export default {
@@ -45,8 +45,8 @@ export default {
           this.isRequesting = false;
         }
       }).catch(() => {
-        this.openSnack(errors(0));
         this.isRequesting = false;
+        logout();
       });
     },
     openSnack(msg) {

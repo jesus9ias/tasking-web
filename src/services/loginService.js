@@ -15,6 +15,10 @@ class LoginService {
   logout() {
     return http('POST', 'logout', { token });
   }
+
+  checkSession() {
+    return http('POST', 'checkSession', { token });
+  }
 }
 
 export default new LoginService();
