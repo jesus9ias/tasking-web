@@ -46,7 +46,7 @@
   }
 
   .section {
-    padding: 70px 0px;
+    padding: 64px 0px;
   }
 
   .md-title {

@@ -45,6 +45,9 @@
           </md-button>
 
           <md-menu-content>
+            <md-menu-item @click.native="$router.push('/settings')">
+              <span>Settings</span>
+            </md-menu-item>
             <md-menu-item @click.native="$router.push('/logout')">
               <span>Log Out</span>
             </md-menu-item>

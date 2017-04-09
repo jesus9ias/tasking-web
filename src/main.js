@@ -28,6 +28,7 @@ Vue.material.registerTheme('stars', {
 
 global.router = new VueRouter({ routes, history: true });
 global.router.beforeEach(authorizeRoute());
+global.eventHub = new Vue();
 
 /* eslint-disable no-new */
 new Vue({

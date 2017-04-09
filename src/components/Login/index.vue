@@ -42,11 +42,6 @@
         </form>
       </md-layout>
     </md-layout>
-
-    <md-snackbar md-position="bottom center" ref="snackbar" md-duration="5000">
-      <span>{{ errorMessage }}</span>
-      <md-button class="md-accent" md-theme="light-blue" @click.native="$refs.snackbar.close()">Close</md-button>
-    </md-snackbar>
   </section>
 </template>
 
@@ -94,23 +89,25 @@ export default {
             document.location.href = '/';
           } else {
             if (response.data.code === 404) {
-              this.openSnack('Incorrect Login Data');
+              this.showModal('Incorrect Login Data');
             } else {
-              this.openSnack(errors(response.data.code));
+              this.showModal(errors(response.data.code));
             }
             this.isLogin = false;
           }
         }).catch(() => {
-          this.openSnack(errors(0));
+          this.showModal('Incorrect Login Data');
           this.isLogin = false;
         });
       } else {
         this.isLogin = false;
       }
     },
-    openSnack(msg) {
-      this.errorMessage = msg;
-      this.$refs.snackbar.open();
+    showModal(msg) {
+      global.eventHub.$emit('showModal', {
+        title: 'Login',
+        message: msg
+      });
     }
   }
 };

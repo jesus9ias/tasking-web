@@ -4,6 +4,7 @@
       :task="task"
       :taskAction="saveTask"
       :isRequesting="isRequesting"
+      titleText="Create Task"
     />
     <md-snackbar md-position="bottom center" ref="snackbar" md-duration="5000">
       <span>{{ errorMessage }}</span>

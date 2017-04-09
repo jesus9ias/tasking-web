@@ -1,6 +1,7 @@
 <template>
   <md-layout :md-gutter="16" md-align="center" class="fixGutter">
-    <md-layout md-flex="50" md-flex-xsmall="100">
+    <md-layout md-column md-flex="50" md-flex-xsmall="100">
+      <h2 class="md-title">{{ titleText }}</h2>
       <form class="md-flex" novalidate @submit.stop.prevent="action">
         <md-input-container v-bind:class="{ 'md-input-invalid': errors.title }">
           <label>Title</label>
@@ -84,8 +85,9 @@ export default {
   props: {
     task: Object,
     taskAction: Function,
+    isRequesting: Boolean,
     actionText: String,
-    isRequesting: Boolean
+    titleText: String
   }
 };
 </script>

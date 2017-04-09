@@ -53,7 +53,6 @@ export default {
         };
         this.isLoading = false;
       }, () => {
-        //  console.log(error);
         this.isLoading = false;
       });
     }
@@ -62,5 +61,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .home {
+    padding: 75px 0px;
+  }
 </style>

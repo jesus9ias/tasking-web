@@ -14,10 +14,10 @@
         </md-card-header-text>
 
         <md-button
-          v-if="task.status===2"
+          v-if="task.status === 2"
           md-theme="stars"
           class="md-icon-button"
-          :class="{'md-accent': task.starredToTask}"
+          :class="{ 'md-accent': task.starredToTask }"
           @click.native="startTask()"
         >
           <md-icon class="md-accent">star</md-icon>
@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import storage from 'key-storage';
 import moment from 'moment';
 import logout from '../../utils/logout';
 import TasksService from '../../services/tasksService';
@@ -76,18 +77,28 @@ const priorities = {
   4: 'Extreme'
 };
 
+const parseStorage = (val) => {
+  if (val === 'true' || val === true) {
+    return true;
+  }
+  return false;
+};
+
 export default {
   name: 'TaskCard',
   data() {
     return {
       theme: '',
-      priorities
+      priorities,
+      showRelativeDates: parseStorage(storage.get('showRelativeDates'))
     };
   },
-  props: ['task'],
   methods: {
     dateFromNow(date) {
-      return moment.tz(date, 'YYYY-MM-DDTHH:mm', 'America/Mexico_City').fromNow();
+      if (this.showRelativeDates) {
+        return moment.tz(date, 'YYYY-MM-DDTHH:mm', 'America/Mexico_City').fromNow();
+      }
+      return moment.tz(date, 'YYYY-MM-DDTHH:mm', 'America/Mexico_City').format('YYYY-MM-DD HH:mm');
     },
     completeTask() {
       TasksService.completeTask(this.task.id)
@@ -95,9 +106,8 @@ export default {
         if (response.data.code === 200) {
           this.task.status = 3;
         }
-      }).catch((error) => {
+      }).catch(() => {
         logout();
-        console.log(error);
       });
     },
     deleteTask() {
@@ -106,9 +116,8 @@ export default {
         if (response.data.code === 200) {
           this.task.status = 4;
         }
-      }).catch((error) => {
+      }).catch(() => {
         logout();
-        console.log(error);
       });
     },
     startTask() {
@@ -119,9 +128,8 @@ export default {
         } else {
           this.task.starredToTask = null;
         }
-      }).catch((error) => {
+      }).catch(() => {
         logout();
-        console.log(error);
       });
     },
     reopenTask() {
@@ -130,9 +138,8 @@ export default {
         if (response.data.code === 200) {
           this.task.status = 2;
         }
-      }).catch((error) => {
+      }).catch(() => {
         logout();
-        console.log(error);
       });
     }
   },
@@ -154,6 +161,9 @@ export default {
       }
       return '';
     }
+  },
+  props: {
+    task: Object
   }
 };
 </script>

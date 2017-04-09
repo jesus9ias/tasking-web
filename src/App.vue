@@ -1,12 +1,18 @@
 <template>
   <div id="app">
+    <modal />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+  import Modal from './components/Common/modal';
+  
   export default {
-    name: 'App'
+    name: 'App',
+    components: {
+      Modal
+    }
   };
 </script>
 

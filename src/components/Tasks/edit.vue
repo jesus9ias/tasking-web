@@ -3,11 +3,12 @@
     <def-task
       :task="task"
       :taskAction="updateTask"
-      actionText="Update"
-      v-if="!isLoading && taskExists"
       :isRequesting="isRequesting"
+      actionText="Update"
+      titleText="Edit Task"
+      v-if="!isLoading && taskExists"
     />
-    <p v-if="!isLoading && !taskExists">This task dosn't exists</p>
+    <p v-if="!isLoading && !taskExists">This task doesn't exists</p>
     <loading :isLoading="isLoading" />
     <md-snackbar md-position="bottom center" ref="snackbar" md-duration="5000">
       <span>{{ errorMessage }}</span>
