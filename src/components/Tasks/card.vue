@@ -169,4 +169,7 @@ export default {
 </script>
 
 <style scoped>
+.md-card-content {
+  word-break: break-all;
+}
 </style>
