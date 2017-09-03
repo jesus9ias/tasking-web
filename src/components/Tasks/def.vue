@@ -10,7 +10,7 @@
         </md-input-container>
         <md-input-container v-bind:class="{ 'md-input-invalid': errors.description }">
           <label>Description</label>
-          <md-textarea maxlength="500" v-model="task.description" />
+          <md-textarea class="description__area" maxlength="500" v-model="task.description" />
           <span class="md-error">Description must have between 1 and 500 characters</span>
         </md-input-container>
         <md-input-container v-bind:class="{ 'md-input-invalid': errors.limitDate }">
@@ -93,5 +93,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .md-input.description__area {
+    height: 200px !important;
+  }
 </style>

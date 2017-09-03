@@ -53,7 +53,7 @@
       </md-card-header>
 
       <md-card-content>
-        {{ task.description }}
+        {{ replaceBreak(task.description )}}
       </md-card-content>
 
       <md-card-content>
@@ -141,6 +141,9 @@ export default {
       }).catch(() => {
         logout();
       });
+    },
+    replaceBreak(description) {
+      return description.replace(/<br \/>/g, ' ');
     }
   },
   computed: {

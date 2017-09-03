@@ -50,9 +50,15 @@ export default {
       TasksService.getOneTask(this.$route.params.id)
       .then((response) => {
         if (response.data.code === 200) {
-          const { title, description, limitDate, priority, isRecurrent } = response.data.data.task;
+          const {
+            title,
+            description,
+            limitDate,
+            priority,
+            isRecurrent
+          } = response.data.data.task;
           this.task.title = title;
-          this.task.description = description;
+          this.task.description = description.replace(/<br \/>/g, '\n');
           this.task.limitDate = limitDate;
           this.task.priority = priority;
           this.task.isRecurrent = Boolean(isRecurrent);
@@ -72,7 +78,14 @@ export default {
     },
     updateTask() {
       this.isRequesting = true;
-      TasksService.updateTask(this.$route.params.id, this.task)
+      const task = {
+        title: this.task.title,
+        description: this.task.description.replace(/\n/g, '<br />'),
+        limitDate: this.task.limitDate,
+        priority: this.task.priority,
+        isRecurrent: this.task.isRecurrent
+      };
+      TasksService.updateTask(this.$route.params.id, task)
       .then((response) => {
         if (response.data.code === 200) {
           this.$router.push('/tasks');

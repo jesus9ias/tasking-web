@@ -37,7 +37,14 @@ export default {
   methods: {
     saveTask() {
       this.isRequesting = true;
-      TasksService.saveTask(this.task)
+      const newTask = {
+        title: this.task.title,
+        description: this.task.description.replace(/\n/g, '<br />'),
+        limitDate: this.task.limitDate,
+        priority: this.task.priority,
+        isRecurrent: this.task.isRecurrent
+      };
+      TasksService.saveTask(newTask)
       .then((response) => {
         if (response.data.code === 200) {
           this.$router.push('/tasks');
