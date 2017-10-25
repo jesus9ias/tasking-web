@@ -52,8 +52,15 @@
         </md-menu>
       </md-card-header>
 
-      <md-card-content>
+      <md-card-content class="descriptionBlock">
         {{ replaceBreak(task.description )}}
+      </md-card-content>
+
+      <md-card-content v-if="tooMuchText">
+        <md-button @click.native="showAllDescription" class="md-icon-button md-primary md-raised md-dense">
+          <md-icon v-if="!isShownAllDescription">expand_more</md-icon>
+          <md-icon v-if="isShownAllDescription">expand_less</md-icon>
+        </md-button>
       </md-card-content>
 
       <md-card-content>
@@ -90,7 +97,8 @@ export default {
     return {
       theme: '',
       priorities,
-      showRelativeDates: parseStorage(storage.get('showRelativeDates'))
+      showRelativeDates: parseStorage(storage.get('showRelativeDates')),
+      isShownAllDescription: false
     };
   },
   methods: {
@@ -143,7 +151,13 @@ export default {
       });
     },
     replaceBreak(description) {
-      return description.replace(/<br \/>/g, ' ');
+      if (description.length <= 100 || this.isShownAllDescription) {
+        return description.replace(/<br \/>/g, ' ');
+      }
+      return description.replace(/<br \/>/g, ' ').substring(0, 100);
+    },
+    showAllDescription() {
+      this.isShownAllDescription = !this.isShownAllDescription;
     }
   },
   computed: {
@@ -163,6 +177,9 @@ export default {
         return 'md-primary';
       }
       return '';
+    },
+    tooMuchText() {
+      return this.task.description.length > 100;
     }
   },
   props: {
@@ -174,5 +191,9 @@ export default {
 <style scoped>
 .md-card-content {
   word-break: break-all;
+}
+.descriptionBlock {
+  max-height: 120px;
+  overflow-y: auto;
 }
 </style>
