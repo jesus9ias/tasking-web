@@ -63,6 +63,10 @@
         </md-button>
       </md-card-content>
 
+      <md-card-content class="descriptionBlock">
+        <md-chips v-model="tags" md-static></md-chips>
+      </md-card-content>
+
       <md-card-content>
         <h3 class="md-subheading">Expiration</h3>
         <div class="md-subhead">{{ dateFromNow(task.limitDate) }}</div>
@@ -98,7 +102,8 @@ export default {
       theme: '',
       priorities,
       showRelativeDates: parseStorage(storage.get('showRelativeDates')),
-      isShownAllDescription: false
+      isShownAllDescription: false,
+      tags: ['Orange', 'Apple', 'Pineapple']
     };
   },
   methods: {
