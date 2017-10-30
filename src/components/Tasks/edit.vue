@@ -32,7 +32,8 @@ export default {
         description: '',
         limitDate: '',
         priority: 1,
-        isRecurrent: false
+        isRecurrent: false,
+        tagsToTask: []
       },
       isLoading: false,
       isRequesting: false,
@@ -55,13 +56,15 @@ export default {
             description,
             limitDate,
             priority,
-            isRecurrent
+            isRecurrent,
+            tagsToTask
           } = response.data.data.task;
           this.task.title = title;
           this.task.description = description.replace(/<br \/>/g, '\n');
           this.task.limitDate = limitDate;
           this.task.priority = priority;
           this.task.isRecurrent = Boolean(isRecurrent);
+          this.task.tagsToTask = tagsToTask;
         } else {
           if (response.data.code === 404) {
             this.openSnack('Task Not Found');
@@ -83,7 +86,8 @@ export default {
         description: this.task.description.replace(/\n/g, '<br />'),
         limitDate: this.task.limitDate,
         priority: this.task.priority,
-        isRecurrent: this.task.isRecurrent
+        isRecurrent: this.task.isRecurrent,
+        tagsToTask: this.task.tagsToTask
       };
       TasksService.updateTask(this.$route.params.id, task)
       .then((response) => {

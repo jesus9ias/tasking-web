@@ -28,6 +28,11 @@
           </md-select>
           <span class="md-error">Must specify a Priority value from the list</span>
         </md-input-container>
+
+        {{ tags }}
+        {{ tagsx }}
+        <md-chips v-model="tagsx" md-input-placeholder="Add a Tag"></md-chips>
+
         <md-button type="submit" class="md-raised md-primary" v-if="!isRequesting">{{ actionText || 'Save' }}</md-button>
         <loading-button :show="isRequesting" />
       </form>
@@ -49,8 +54,12 @@ export default {
   name: 'DefTask',
   data() {
     return {
-      errors: baseErrors()
+      errors: baseErrors(),
+      tagsx: []
     };
+  },
+  created() {
+    this.tagsx = this.tags;
   },
   methods: {
     action() {
@@ -80,6 +89,13 @@ export default {
         return true;
       }
       return false;
+    }
+  },
+  computed: {
+    tags() {
+      return this.task.tagsToTask.map((tag) => {
+        return tag.taggedWithTag.name;
+      });
     }
   },
   props: {

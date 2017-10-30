@@ -102,8 +102,7 @@ export default {
       theme: '',
       priorities,
       showRelativeDates: parseStorage(storage.get('showRelativeDates')),
-      isShownAllDescription: false,
-      tags: ['Orange', 'Apple', 'Pineapple']
+      isShownAllDescription: false
     };
   },
   methods: {
@@ -185,6 +184,11 @@ export default {
     },
     tooMuchText() {
       return this.task.description.length > 100;
+    },
+    tags() {
+      return this.task.tagsToTask.map((tag) => {
+        return tag.taggedWithTag.name;
+      });
     }
   },
   props: {

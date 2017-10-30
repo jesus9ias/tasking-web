@@ -28,7 +28,8 @@ export default {
         description: '',
         limitDate: moment.tz('America/Mexico_City').format('YYYY-MM-DDTHH:mm'),
         priority: 1,
-        isRecurrent: false
+        isRecurrent: false,
+        tagsToTask: []
       },
       isRequesting: false,
       errorMessage: ''
@@ -42,7 +43,8 @@ export default {
         description: this.task.description.replace(/\n/g, '<br />'),
         limitDate: this.task.limitDate,
         priority: this.task.priority,
-        isRecurrent: this.task.isRecurrent
+        isRecurrent: this.task.isRecurrent,
+        tagsToTask: this.task.tagsToTask
       };
       TasksService.saveTask(newTask)
       .then((response) => {
