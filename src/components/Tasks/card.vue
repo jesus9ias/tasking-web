@@ -9,9 +9,17 @@
 
         <md-card-header-text>
           <div class="md-title">{{ task.title }}</div>
-          <div class="md-subhead">{{ dateFromNow(task.createdAt) }}</div>
           <div class="md-subhead">{{ priorities[task.priority] }}</div>
         </md-card-header-text>
+
+        <md-button
+          v-if="task.status === 2"
+          md-theme="stars"
+          class="md-icon-button"
+          @click.native="$router.push('/tasks/' + task.id)"
+        >
+          <md-icon class="md-accent">mode_edit</md-icon>
+        </md-button>
 
         <md-button
           v-if="task.status === 2"
@@ -29,11 +37,6 @@
           </md-button>
 
           <md-menu-content>
-            <md-menu-item v-if="task.status===2" @click.native="$router.push('/tasks/' + task.id)">
-              <span>Edit</span>
-              <md-icon>mode_edit</md-icon>
-            </md-menu-item>
-
             <md-menu-item v-if="task.status===2" @click.native="deleteTask()">
               <span>Delete</span>
               <md-icon>delete</md-icon>
@@ -52,24 +55,31 @@
         </md-menu>
       </md-card-header>
 
-      <md-card-content class="descriptionBlock">
-        {{ replaceBreak(task.description )}}
+      <md-card-header>
+        <md-card-header-text>
+          <div class="md-subhead">Created <b>{{ dateFromNow(task.createdAt) }}</b> and expires <b>{{ dateFromNow(task.limitDate) }}</b></div>
+        </md-card-header-text>
+      </md-card-header>
+
+      <md-card-expand v-if="tooMuchText">
+        <md-card-actions>
+          <span style="flex: 1"></span>
+          <md-button @click.native="showAllDescription" class="md-icon-button" md-expand-trigger>
+            <md-icon>keyboard_arrow_down</md-icon>
+          </md-button>
+        </md-card-actions>
+
+        <md-card-content class="descriptionBlock">
+          {{ allDescription }}
+        </md-card-content>
+      </md-card-expand>
+
+      <md-card-content v-if="!isShownAllDescription" class="descriptionBlock">
+        {{ minDescription }}
       </md-card-content>
 
-      <md-card-content v-if="tooMuchText">
-        <md-button @click.native="showAllDescription" class="md-icon-button md-primary md-raised md-dense">
-          <md-icon v-if="!isShownAllDescription">expand_more</md-icon>
-          <md-icon v-if="isShownAllDescription">expand_less</md-icon>
-        </md-button>
-      </md-card-content>
-
-      <md-card-content class="descriptionBlock">
-        <md-chips v-model="tags" md-static></md-chips>
-      </md-card-content>
-
-      <md-card-content>
-        <h3 class="md-subheading">Expiration</h3>
-        <div class="md-subhead">{{ dateFromNow(task.limitDate) }}</div>
+      <md-card-content v-if="tags.length > 0">
+        <md-chip :key="t" v-for="(tag, t) in tags">{{ tag }}</md-chip>
       </md-card-content>
     </md-card>
   </md-layout>
@@ -155,10 +165,7 @@ export default {
       });
     },
     replaceBreak(description) {
-      if (description.length <= 100 || this.isShownAllDescription) {
-        return description.replace(/<br \/>/g, ' ');
-      }
-      return description.replace(/<br \/>/g, ' ').substring(0, 100);
+      return description.replace(/<br \/>/g, ' ');
     },
     showAllDescription() {
       this.isShownAllDescription = !this.isShownAllDescription;
@@ -189,6 +196,12 @@ export default {
       return this.task.tagsToTask.map((tag) => {
         return tag.taggedWithTag.name;
       });
+    },
+    allDescription() {
+      return this.replaceBreak(this.task.description);
+    },
+    minDescription() {
+      return this.replaceBreak(this.task.description).substring(0, 100);
     }
   },
   props: {

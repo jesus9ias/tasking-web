@@ -29,8 +29,6 @@
           <span class="md-error">Must specify a Priority value from the list</span>
         </md-input-container>
 
-        {{ tags }}
-        {{ tagsx }}
         <md-chips v-model="tagsx" md-input-placeholder="Add a Tag"></md-chips>
 
         <md-button type="submit" class="md-raised md-primary" v-if="!isRequesting">{{ actionText || 'Save' }}</md-button>
